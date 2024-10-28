@@ -9,22 +9,22 @@
 
 declare(strict_types=1);
 
-namespace Contentful\Tests\Laravel\Unit;
+namespace Presentcompany\Tests\ContentfulLaravel\Unit;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Orchestra\Testbench\Concerns\CreatesApplication;
 
-class ConfigTest extends BaseTestCase
+class CDAConfigTest extends BaseTestCase
 {
     use CreatesApplication;
 
     public function testGetConfig()
     {
-        $this->assertSame('test_space', config('contentful.delivery.space'));
+        $this->assertSame('test_space', config('contentful-cda.delivery.space'));
     }
 
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
-        $app['config']->set('contentful.delivery.space', 'test_space');
+        $app['config']->set('contentful-cda.delivery.space', 'test_space');
     }
 }

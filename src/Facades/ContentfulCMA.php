@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace Contentful\Laravel\Facades;
+namespace Presentcompany\ContentfulLaravel\Facades;
 
-use Contentful\Delivery\Client;
+use Contentful\Management\Client;
 use Illuminate\Support\Facades\Facade;
 
-class ContentfulDelivery extends Facade
+class ContentfulCMA extends Facade
 {
     /**
      * Get the registered name of the component.

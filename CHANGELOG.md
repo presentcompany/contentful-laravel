@@ -9,6 +9,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 > No meaningful changes since last release.
 <!-- /PENDING-CHANGES -->
 
+## [10.0.0](https://github.com/presentcompany/contentful-laravel/tree/10.0.0)  (2024-10-28)
+
+## Added
+
+> Included instructions to get working from the GitHub repo
+> Dropped support for Laravel pre v11.0
+> Included support for Contentful Content Management API as CMAServiceProvider
+> Refactored Contentful Content Delivery API integration to CDAServiceProvider
+> Upgraded to phpunit/phpunit ^11.0
+> Upgraded to orchestra/testbench ^9.0
+
 ## [9.0.2](https://github.com/contentful/contentful-laravel/tree/9.0.2) (2024-04-02)
 
 ## Added

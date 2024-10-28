@@ -1,42 +1,46 @@
 {
-    "name": "contentful/laravel",
-    "description": "Integrates the Contentful PHP SDK with Laravel.",
+    "name": "presentcompany/contentful-laravel",
+    "description": "Integrates the Contentful CDA and CMA SDKs with Laravel.",
     "type": "library",
     "license": "MIT",
+    "version": "10.0.0",
     "require": {
         "php": "^8.0",
-        "laravel/framework": "^8.0|^9.0|^10.0|^11.0",
+        "laravel/framework": "^11.0",
         "contentful/contentful": "^7.0.1",
-        "contentful/core": "^4.0"
+        "contentful/core": "^4.0",
+        "contentful/contentful-management": "^4.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5",
-        "orchestra/testbench": "^5.1|^6.0",
-        "phpstan/phpstan": "^1.9"
+        "orchestra/testbench": "^9.0",
+        "phpstan/phpstan": "^1.9",
+        "phpunit/phpunit": "^11"
     },
     "autoload": {
         "psr-4": {
-            "Contentful\\Laravel\\": "src/"
+            "Presentcompany\\ContentfulLaravel\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Contentful\\Tests\\Laravel\\": "tests/"
+            "Presentcompany\\Tests\\ContentfulLaravel\\": "tests/"
         }
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "test-quick-fail": "php vendor/bin/phpunit --stop-on-error --stop-on-failure -v",
+        "test-quick-fail": "php vendor/bin/phpunit --stop-on-error --stop-on-failure",
         "lint-static-analysis": "php vendor/bin/phpstan analyse src --level=5",
         "release": "php vendor/contentful/core/scripts/release.php"
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Contentful\\Laravel\\ContentfulServiceProvider"
+                "Presentcompany\\ContentfulLaravel\\CDAServiceProvider",
+                "Presentcompany\\ContentfulLaravel\\CMAServiceProvider"
             ],
             "aliases": {
-                "ContentfulDelivery": "Contentful\\Laravel\\Facades\\ContentfulDelivery"
+                "ContentfulCDA": "Presentcompany\\ContentfulLaravel\\Facades\\ContentfulCDA",
+                "ContentfulCMA": "Presentcompany\\ContentfulLaravel\\Facades\\ContentfulCMA"
             }
         }
     }
