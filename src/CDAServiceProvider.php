@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Contentful\Laravel;
+namespace Presentcompany\ContentfulLaravel;
 
 use Contentful\Core\Api\IntegrationInterface;
 use Contentful\Delivery\Client;
@@ -17,7 +17,7 @@ use Contentful\Delivery\ClientOptions;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
-class ContentfulServiceProvider extends ServiceProvider implements IntegrationInterface
+class CDAServiceProvider extends ServiceProvider implements IntegrationInterface
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -31,13 +31,13 @@ class ContentfulServiceProvider extends ServiceProvider implements IntegrationIn
      */
     public function boot()
     {
-        $configFile = (string) realpath(__DIR__.'/config/contentful.php');
+        $configFile = (string) realpath(__DIR__ . '/config/contentful-cda.php');
 
         $this->publishes([
-            $configFile => $this->app->make('path.config').'/contentful.php',
+            $configFile => $this->app->make('path.config').'/contentful-cda.php',
         ]);
 
-        $this->mergeConfigFrom($configFile, 'contentful');
+        $this->mergeConfigFrom($configFile, 'contentful-cda');
     }
 
     /**
@@ -49,22 +49,22 @@ class ContentfulServiceProvider extends ServiceProvider implements IntegrationIn
             $config = $app['config'];
 
             $options = new ClientOptions();
-            if ($config['contentful.delivery.preview']) {
+            if ($config['contentful-cda.delivery.preview']) {
                 $options->usingPreviewApi();
             }
 
-            if ($config['contentful.delivery.defaultLocale']) {
-                $options->withDefaultLocale($config['contentful.delivery.defaultLocale']);
+            if ($config['contentful-cda.delivery.defaultLocale']) {
+                $options->withDefaultLocale($config['contentful-cda.delivery.defaultLocale']);
             }
 
-            if (\is_callable($config['contentful.delivery.options'])) {
-                ($config['contentful.delivery.options'])($options, $app);
+            if (\is_callable($config['contentful-cda.delivery.options'])) {
+                ($config['contentful-cda.delivery.options'])($options, $app);
             }
 
             $client = new Client(
-                $config['contentful.delivery.token'],
-                $config['contentful.delivery.space'],
-                $config['contentful.delivery.environment'],
+                $config['contentful-cda.delivery.token'],
+                $config['contentful-cda.delivery.space'],
+                $config['contentful-cda.delivery.environment'],
                 $options
             );
             $client->useIntegration($this);
@@ -85,6 +85,6 @@ class ContentfulServiceProvider extends ServiceProvider implements IntegrationIn
 
     public function getIntegrationPackageName(): string
     {
-        return 'contentful/laravel';
+        return 'presentcompany/contentful-laravel';
     }
 }

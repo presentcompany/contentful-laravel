@@ -1,5 +1,13 @@
 # Contentful Laravel Package
 
+## Reworked by Will Walsh for Present Company Pty Ltd
+
+### Intention
+
+- Add the Contentful Content Management SDK into the package and create another Service Provider
+- Add the Contentful CLI tool and write migration scripts
+- ¡
+
 [![Packagist](https://img.shields.io/packagist/v/contentful/laravel.svg?style=for-the-badge)](https://packagist.org/packages/contentful/laravel)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/contentful/laravel.svg?style=for-the-badge)](https://packagist.org/packages/contentful/laravel)
 [![Packagist](https://img.shields.io/github/license/contentful/contentful-laravel.svg?style=for-the-badge)](https://packagist.org/packages/contentful/laravel)
@@ -9,17 +17,29 @@
 
 ## Setup
 
-Add this package to your application by using [Composer](https://getcomposer.org/) and executing the following command:
+Add this package to your application by including this in your `composer.json` file:
 
-``` bash
-composer require contentful/laravel
+``` json
+{
+    "name": "mynamespace/my-project-that-uses-contentful-laravel",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/presentcompany/contentful-laravel.git"
+        }
+    ],
+    "require": {
+        "presentcompany/contentful-laravel": "dev-main"
+    }
+}
 ```
 
 Add the service provider to the `providers` array in `config/app.php`:
 
 ``` php
 'providers' => [
-    Contentful\Laravel\ContentfulServiceProvider::class,
+    Presentcompany\ContentfulLaravel\CDAServiceProvider::class,
+    Presentcompany\ContentfulLaravel\CMAServiceProvider::class,
 ],
 ```
 
@@ -28,13 +48,15 @@ Add the service provider to the `providers` array in `config/app.php`:
 Publish the config file:
 
 ``` sh
-php artisan vendor:publish --provider="Contentful\Laravel\ContentfulServiceProvider"
+php artisan vendor:publish --provider="Presentcompany\ContentfulLaravel\CDAServiceProvider"
+php artisan vendor:publish --provider="Presentcompany\ContentfulLaravel\CMAServiceProvider"
 ```
 
-This will add `contentful.php` to your `/config` folder. Next, add your space ID and API key to your `.env` file:
+This will add `contentful-cda.php` and `contentful-cma.php` files to your `/config` folder. Next, add your space ID and API key to your `.env` file:
 
-    CONTENTFUL_SPACE_ID="cfexampleapi"
+    CONTENTFUL_DELIVERY_SPACE_ID="cfexampleapi"
     CONTENTFUL_DELIVERY_TOKEN="b4c0n73n7fu1"
+    CONTENTFUL_MANAGEMENT_TOKEN="b4c0n73n7fu1"
 
 ## What is Contentful?
 
